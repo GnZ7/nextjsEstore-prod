@@ -24,7 +24,9 @@ import firebaseApp from '@/libs/firebase'
 interface ManageProductsClientProps {
   products: Product[]
 }
-const ManageProductsClient: React.FC<ManageProductsClientProps> = ({ products }) => {
+const ManageProductsClient: React.FC<ManageProductsClientProps> = ({
+  products
+}) => {
   const router = useRouter()
   const storage = getStorage(firebaseApp)
 

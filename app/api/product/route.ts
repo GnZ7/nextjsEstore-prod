@@ -2,8 +2,9 @@ import prisma from "@/libs/prismadb";
 import React from "react";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/actions/getCurrentUser";
+import { Product } from "@prisma/client";
 
-export async function POST(request: Request) {
+export async function POST(request: Request, product: Product) {
   const currentUser = await getCurrentUser();
   if (!currentUser || currentUser.role != "ADMIN") {
     return NextResponse.error;
@@ -12,7 +13,7 @@ export async function POST(request: Request) {
   const { name, description, price, brand, category, inStock, images } = body;
 
   try {
-    const product = await prisma.product.create({
+     product = await prisma.product.create({
       data: {
         name,
         description,
