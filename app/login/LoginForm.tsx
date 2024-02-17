@@ -51,12 +51,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
       router.push('/cart')
       router.refresh()
     }
-  }, [currentUser, router])
+  }, [])
 
   if (currentUser) {
     return (
       <p className='text-center'>
-        Ya ingresaste a tu cuenta. Redireccionando...
+        Ingresaste a tu cuenta. Redireccionando...
       </p>
     )
   }

@@ -1,0 +1,4 @@
+- Al desloguear redireccionar al home.
+
+- Al desloguear no borra el contenido del cart. (IDEA) guardar el cart con el usuario en el localstorage, si coincide el usuario
+  actual con el del storage cargarlo, si no, no.
