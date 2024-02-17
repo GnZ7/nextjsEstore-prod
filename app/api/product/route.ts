@@ -1,16 +1,13 @@
 import prisma from "@/libs/prismadb";
-import React from "react";
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/actions/getCurrentUser";
-import { Product } from "@prisma/client";
 
 export async function POST(request: NextRequest) {
   const currentUser = await getCurrentUser();
   if (!currentUser || currentUser.role != "ADMIN") {
-    return NextResponse.error;
+    return new Response("Unauthorized", { status: 401 });
   }
 
-  
   const body = await request.json();
   const { name, description, price, brand, category, inStock, images } = body;
 
@@ -26,9 +23,13 @@ export async function POST(request: NextRequest) {
         images,
       },
     });
-    return NextResponse.json(product);
+    return new Response(JSON.stringify(product), {
+      status: 201,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
-    return NextResponse.error;
+    console.error("Error creating product:", error);
+    return new Response("Failed to create product", { status: 500 });
   }
 }
 
@@ -36,7 +37,7 @@ export async function PUT(request: Request) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser || currentUser.role != "ADMIN") {
-    return NextResponse.error();
+    return new Response("Unauthorized", { status: 401 });
   }
 
   const body = await request.json();
@@ -49,5 +50,8 @@ export async function PUT(request: Request) {
     data: { inStock },
   });
 
-  return NextResponse.json(product);
+  return new Response(JSON.stringify(product), {
+    status: 201,
+    headers: { "Content-Type": "application/json" },
+  });
 }
