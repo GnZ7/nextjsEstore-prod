@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { createContext } from 'react'
 import { CartProductType } from '../components/products/ProductDetail'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 
 //variables que van a ser pasadas a traves de "value"
 type CartContextType = {
@@ -150,7 +150,7 @@ export const CartContextProvider = (props: Props) => {
       setPaymentIntent(val)
       localStorage.setItem('paymentIntent', JSON.stringify(val))
     },
-    [paymentIntent]
+    []
   )
   const value = {
     cartTotalQty,

@@ -7,6 +7,7 @@ import { SafeUser } from '@/types'
 import { Redressed } from 'next/font/google'
 import Categories from './Categories'
 import Searchbar from './Searchbar'
+import { Suspense } from 'react'
 
 const redressed = Redressed({ subsets: ['latin'], weight: ['400'] })
 
@@ -37,7 +38,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
           </div>
         </Container>
       </div>
-      <Categories />
+      <Suspense>
+        <Categories />
+      </Suspense>
     </div>
   )
 }
