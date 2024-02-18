@@ -68,12 +68,6 @@ const CartClient: React.FC<CartClientProps> = ({ currentUser }) => {
     return (
       <div className='flex flex-col w-1/3 m-auto'>
         <NullData title='Ingresa a tu cuenta para ver tu carrito.' />
-        <Button
-          label='Ingresar'
-          onClick={() => {
-            router.push('/login')
-          }}
-        />
       </div>
     )
   }

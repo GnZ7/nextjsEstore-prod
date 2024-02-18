@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Avatar from '../Avatar'
 import { AiFillCaretDown } from 'react-icons/ai'
 import Link from 'next/link'
@@ -18,6 +18,12 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const toggleOpen = useCallback(() => {
     setIsUserMenuOpen(prev => !prev)
   }, [])
+
+  useEffect(() => {
+    if (!currentUser) {
+      router.push('/')
+    }
+  }, [currentUser])
 
   return (
     <>
@@ -80,7 +86,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                   onClick={() => {
                     toggleOpen()
                     signOut()
-                    router.push('/login')
+
+                    router.push('/')
                   }}
                 >
                   Salir
