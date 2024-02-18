@@ -1,4 +1,6 @@
-- Al desloguear redireccionar al home.
+- Al desloguear redireccionar al home. OK
 
 - Al desloguear no borra el contenido del cart. (IDEA) guardar el cart con el usuario en el localstorage, si coincide el usuario
-  actual con el del storage cargarlo, si no, no. (OTRA IDEA) si no hay usuario no cargar carrito.
+  actual con el del storage, cargarlo. (OTRA IDEA) si no hay usuario no cargar carrito. OK
+
+- Usuarios distintos comparten localStorage por lo que el carrito de compras es el mismo.
