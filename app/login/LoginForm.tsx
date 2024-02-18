@@ -37,6 +37,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
     }).then(callback => {
       if (callback?.ok) {
         router.push('/')
+        router.refresh()
         toast.success('Ingresaste a tu cuenta')
       }
       if (callback?.error) {

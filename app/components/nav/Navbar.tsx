@@ -7,7 +7,8 @@ import { SafeUser } from '@/types'
 import { Redressed } from 'next/font/google'
 import Categories from './Categories'
 import Searchbar from './Searchbar'
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 const redressed = Redressed({ subsets: ['latin'], weight: ['400'] })
 
@@ -16,8 +17,10 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
-  //const currentUser = await getCurrentUser()
-  //console.log('Usuario desde NAVBAR: ', currentUser)
+  const router = useRouter()
+  /*useEffect(() => {
+    router.refresh()
+  }, [currentUser])*/
   return (
     <div className='sticky top-0 w-full bg-slate-400 z-30 shadow-sm text-slate-50'>
       <div className='py-4'/* border-b-[1px]*/>
