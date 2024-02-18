@@ -2,8 +2,14 @@ import { useCart } from '@/app/hooks/useCart'
 import { useRouter } from 'next/navigation'
 import { CiShoppingCart } from 'react-icons/ci'
 import React from 'react'
+import { User } from '@prisma/client'
+import { SafeUser } from '@/types'
 
-const CartCount = () => {
+interface CartCountProps {
+  currentUser: SafeUser | null
+}
+
+const CartCount: React.FC<CartCountProps> = ({ currentUser }) => {
   const { cartTotalQty } = useCart()
   const router = useRouter()
 
@@ -15,7 +21,7 @@ const CartCount = () => {
       <div className='text-3xl p'>
         <CiShoppingCart />
       </div>
-      {cartTotalQty ? (
+      {currentUser && cartTotalQty ? (
         <span
           className='
             absolute
