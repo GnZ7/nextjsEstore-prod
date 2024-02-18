@@ -9,6 +9,7 @@ import ItemContent from './ItemContent'
 import formatPrice from '@/utils/formatPrice'
 import { useRouter } from 'next/navigation'
 import { SafeUser } from '@/types'
+import NullData from '../components/NullData'
 
 interface CartClientProps {
   currentUser: SafeUser | null
@@ -18,10 +19,10 @@ const CartClient: React.FC<CartClientProps> = ({ currentUser }) => {
   const { cartProducts, handleDropCart, cartTotalPrice, cartTotalQty } =
     useCart()
 
-  if (cartProducts) {
+  if (currentUser && cartProducts) {
     return (
       <div>
-        <Heading title='Carrito de Compras' center />
+
         <div className='grid grid-cols-5 text-xs gap-4 pb-2 items-center mt-8'>
           <div className='col-span-2 justify-self-start'>Producto</div>
           <div className='justify-self-center'>Precio</div>
@@ -50,7 +51,7 @@ const CartClient: React.FC<CartClientProps> = ({ currentUser }) => {
               <span>{formatPrice(cartTotalPrice)}</span>
             </div>
             <Button
-              label={currentUser ? 'Pagar' : 'Ingresá a tu cuenta para pagar'}
+              label='Pagar'
               onClick={() => {
                 currentUser ? router.push('/checkout') : router.push('/login')
               }}
@@ -63,7 +64,20 @@ const CartClient: React.FC<CartClientProps> = ({ currentUser }) => {
         </div>
       </div>
     )
-  } else {
+  } else if (!currentUser) {
+    return (
+      <div className='flex flex-col w-1/3 m-auto'>
+        <NullData title='Ingresa a tu cuenta para ver tu carrito.' />
+        <Button
+          label='Ingresar'
+          onClick={() => {
+            router.push('/login')
+          }}
+        />
+      </div>
+    )
+  }
+  else {
     return (
       <div className='flex flex-col items-center'>
         <div className='text-2xl'>Tu carrito está vacío</div>
