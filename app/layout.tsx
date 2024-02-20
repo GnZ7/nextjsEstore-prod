@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: 'Ecommerce app'
 }
 
-export default async function RootLayout({
+export default async function RootLayout ({
   children
 }: {
   children: React.ReactNode
@@ -32,7 +32,9 @@ export default async function RootLayout({
             }
           }}
         />
-        <CartProvider>
+        {/* Paso currentUser como prop a CartProvider para que pueda ser accedido
+        y pasado hacia abajo al CartContextProvider en useCart */}
+        <CartProvider currentUser={currentUser}>
           <div className='flex flex-col min-h-screen'>
             <Navbar currentUser={currentUser} />
             <main className='flex-grow'>{children}</main>

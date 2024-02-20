@@ -28,9 +28,11 @@ export const CartContextProvider = (props: Props) => {
     null
   )
   const [paymentIntent, setPaymentIntent] = useState<string | null>()
+  const [userId, setUserId] = useState(props.userId) //Recupera el userId pasado desde el layout para diferenciar el carrito de cada usuario en el localstorage
 
   useEffect(() => {
-    const storedCartItems: any = localStorage.getItem('CartItems')
+    //console.log('USER ID DESDE USECART > USEFFECT: ', userId)
+    const storedCartItems: any = localStorage.getItem(`CartItems_${userId}`)
     const retrievedCartItems: CartProductType[] | null =
       JSON.parse(storedCartItems)
     setCartProducts(retrievedCartItems)
@@ -75,7 +77,7 @@ export const CartContextProvider = (props: Props) => {
         updatedCart = [product]
       }
 
-      localStorage.setItem('CartItems', JSON.stringify(updatedCart))
+      localStorage.setItem(`CartItems_${userId}`, JSON.stringify(updatedCart))
 
       return updatedCart
     })
@@ -90,7 +92,10 @@ export const CartContextProvider = (props: Props) => {
         })
         setCartProducts(filteredProducts)
         toast.success('producto eliminado')
-        localStorage.setItem('CartItems', JSON.stringify(filteredProducts))
+        localStorage.setItem(
+          `CartItems_${userId}`,
+          JSON.stringify(filteredProducts)
+        )
       }
     },
     [cartProducts]
@@ -111,7 +116,7 @@ export const CartContextProvider = (props: Props) => {
         }
 
         setCartProducts(updatedCart)
-        localStorage.setItem('CartItems', JSON.stringify(updatedCart))
+        localStorage.setItem(`CartItems_${userId}`, JSON.stringify(updatedCart))
       }
     },
     [cartProducts]
@@ -132,7 +137,7 @@ export const CartContextProvider = (props: Props) => {
         }
 
         setCartProducts(updatedCart)
-        localStorage.setItem('CartItems', JSON.stringify(updatedCart))
+        localStorage.setItem(`CartItems_${userId}`, JSON.stringify(updatedCart))
       }
     },
     [cartProducts]
@@ -141,7 +146,7 @@ export const CartContextProvider = (props: Props) => {
   const handleDropCart = useCallback(() => {
     setCartProducts(null)
     setCartTotalQty(0)
-    localStorage.removeItem('CartItems')
+    localStorage.removeItem(`CartItems_${userId}`)
     localStorage.removeItem('paymentIntent')
   }, [])
 
