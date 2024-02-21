@@ -6,13 +6,13 @@ const HomeBanner = () => {
     <div className='relative bg-gradient-to-b from-sky-500 to-sky-700 mb-8'>
       <div className='mx-auto px-8 py-12 flex flex-col gap-2 md:flex-row items-center justify-evenly'>
         <div className='mb-0 md:mb-0 text-center'>
-          <h1 className='text-4xl md:6xl text-white mb-4'>
+          <h1 className='text-4xl mb-1 md:5xl text-yellow-300'>
             Ofertas de verano!
           </h1>
-          <p className='text-lg md:text-xl text-white mb-7'>
+          <p className='text-lg md:text-xl text-slate-100 mb-7'>
             Disfruta descuentos en productos seleccionados
           </p>
-          <p className='text-4xl md:text-6xl font-bold text-yellow-300'>
+          <p className='text-4xl md:text-8xl font-bold text-red-600'>
             50% OFF!
           </p>
         </div>
